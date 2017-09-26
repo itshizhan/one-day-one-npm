@@ -1,0 +1,25 @@
+{
+  "name": "one-day-one-npm",
+  "version": "1.0.0",
+  "description": "one day one npm packages. 一天学习一个npm 模块",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leeson8888/one-day-one-npm.git"
+  },
+  "keywords": [
+    "node_modules"
+  ],
+  "author": "leeson888",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leeson8888/one-day-one-npm/issues"
+  },
+  "homepage": "https://github.com/leeson8888/one-day-one-npm#readme",
+  "devDependencies": {
+    "is-type-of": "^1.2.0"
+  }
+}
