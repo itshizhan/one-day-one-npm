@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/leeson8888/one-day-one-npm#readme",
   "devDependencies": {
+    "is-generator-function": "^1.0.6",
     "is-type-of": "^1.2.0"
   }
 }
