@@ -8,6 +8,8 @@ one day one npm packages. 一天学习一个npm 模块
 
 [001：ee-first](https://github.com/leeson8888/one-day-one-npm/tree/master/002-ee-first)
 
+[003：is-generator-function](https://github.com/leeson8888/one-day-one-npm/tree/master/002-ee-first)
+
 
 
 
