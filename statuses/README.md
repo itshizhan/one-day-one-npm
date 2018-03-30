@@ -1,16 +1,16 @@
-HTTP status utility for node.
 
-## Installation
 
-This is a [Node.js](https://nodejs.org/en/) module available through the
-[npm registry](https://www.npmjs.com/). Installation is done using the
-[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+## 作用
+
+适用于node环境的http状态码工具
+
+## 安装
 
 ```sh
-$ npm install statuses
+$ npm install statuses 
 ```
 
-## API
+## 主要API
 
 <!-- eslint-disable no-unused-vars -->
 
@@ -20,8 +20,7 @@ var status = require('statuses')
 
 ### var code = status(Integer || String)
 
-If `Integer` or `String` is a valid HTTP code or status message, then the
-appropriate `code` will be returned. Otherwise, an error will be thrown.
+参数Integer || String 如果是有效的http 状态码或状态码短语，则返回状态码code，否则抛出错误
 
 <!-- eslint-disable no-undef -->
 
@@ -31,28 +30,42 @@ status('403') // => 403
 status('forbidden') // => 403
 status('Forbidden') // => 403
 status(306) // throws, as it's not supported by node.js
+
 ```
+
+```js
+var code  = status(Integet || String)
+status(403);
+status('forbidden');
+status('Forbidden');
+```
+
+
 
 ### status.codes
 
-Returns an array of all the status codes as `Integer`s.
+返回所有支持的状态码的数字数组。
+
+即：
+
+```js
+[ 100,  101,102,200,201,…………,510, 511 ]
+```
+
+
 
 ### var msg = status[code]
 
-Map of `code` to `status message`. `undefined` for invalid `code`s.
-
-<!-- eslint-disable no-undef, no-unused-expressions -->
+返回状态码对应的消息短语，如果状态码不合法，返回`undefined`,例如：
 
 ```js
 status[404] // => 'Not Found'
+var msg = status[code]
 ```
 
 ### var code = status[msg]
 
-Map of `status message` to `code`. `msg` can either be title-cased or
-lower-cased. `undefined` for invalid `status message`s.
-
-<!-- eslint-disable no-undef, no-unused-expressions -->
+返回状态码消息短语对应的状态码，msg参数可以是 title-cased 或lower-cased 格式。如果是非法的消息短语，返回`undefined`，例如：
 
 ```js
 status['not found'] // => 404
@@ -61,13 +74,13 @@ status['Not Found'] // => 404
 
 ### status.redirect[code]
 
-Returns `true` if a status code is a valid redirect status.
-
-<!-- eslint-disable no-undef, no-unused-expressions -->
+如果状态码是一个有效的重定向状态码，返回 `true` ，否则返回`undefined`
 
 ```js
+
 status.redirect[200] // => undefined
 status.redirect[301] // => true
+
 ```
 
 ### status.empty[code]
@@ -109,4 +122,5 @@ To rebuild `codes.json`, run the following:
 npm run fetch
 # build codes.json
 npm run build
+
 ```
