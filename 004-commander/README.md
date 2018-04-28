@@ -10,25 +10,25 @@ $ npm install commander --save
 
 ```js
 program
-  .version(require('../package').version,'-v, --version')
-	.usage('<command> <dir>  [options]')
-	.option('-t, --type [value]', 'technology stack: react|vue','react')
-	.option('-s, --is-spa [value]', 'is spa: spa|multipage','multipage')
+.version(require('../package').version,'-v, --version')
+.usage('<command> <dir>  [options]')
+.option('-t, --type [value]', 'technology stack: react|vue','react')
+.option('-s, --is-spa [value]', 'is spa: spa|multipage','multipage')
 
 
 program
-	.command('webpack <dir>')
-	.alias('w')
-  .description('create a new webpack react/vue multipage project from a template')
-  .action(function(dir, cmd){
+.command('webpack <dir>')
+.alias('w')
+.description('create a new webpack react/vue multipage project from a template')
+.action(function(dir, cmd){
 	
-	})    
-	//自定义帮助信息
-  .on('--help', function() {
-			console.log('例如:')
-			console.log('')
-			console.log('create w react-demo -t vue -s spa')
-    });
+})    
+//自定义帮助信息
+.on('--help', function() {
+	console.log('例如:')
+	console.log('')
+	console.log('create w react-demo -t vue -s spa')
+});
 	
 // 此句必须可少，否则无法接收任何参数
 program.parse(process.argv)
@@ -53,29 +53,29 @@ program.parse(process.argv)
 书写命令行工具.
 
 
-```sh
+```js
 #!/usr/bin/env node
 var program = require('commander');
 
 program
-  .version(require('../package').version,'-v, --version')
-	.usage('<command> <dir>  [options]')
-	.option('-t, --type [value]', 'technology stack: react|vue','react')
-	.option('-s, --is-spa [value]', 'is spa: spa|multipage','multipage')
+.version(require('../package').version,'-v, --version')
+.usage('<command> <dir>  [options]')
+.option('-t, --type [value]', 'technology stack: react|vue','react')
+.option('-s, --is-spa [value]', 'is spa: spa|multipage','multipage')
 
 program
-  .command('webpack <dir>')
-  .description('create a new webpack react/vue multipage project from a template')
-  .action(function(dir, cmd){
-		
-	});
+.command('webpack <dir>')
+.description('create a new webpack react/vue multipage project from a template')
+.action(function(dir, cmd){
+	
+});
 	
 program
-	.command('parcel <dir>')
-	.description('create a new parcel react/vue multipage project from a template')
-	.action(function(dir, cmd){
-	
-	});
+.command('parcel <dir>')
+.description('create a new parcel react/vue multipage project from a template')
+.action(function(dir, cmd){
+
+});
 
 program.parse(process.argv);
 
