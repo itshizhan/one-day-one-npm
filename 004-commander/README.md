@@ -49,6 +49,85 @@ program.parse(process.argv)
 
 > 特别注意：<> 表示必填，[] 表示选填
 
+# 常用API
+
+#### `version`
+自动生成版本信息，见上
+
+#### `option`
+`.option('-n, --name <name>', 'description', 'default value')`
+
+- 第一个参数是选项定义，分为短定义和长定义。用|，,，连接。
+参数可以用<>或者[]修饰，前者意为必须参数，后者意为可选参数。
+- 第二个参数为选项描述
+- 第三个参数为选项参数默认值，可选。
+
+
+#### `command`
+`.command('name <path>', 'description',opts)`
+最复杂的一个命令
+- 第一个为命令定义，第二个命令描述，第三个为命令辅助修饰对象。
+- 第一个参数中可以使用<>或者[]修饰命令参数
+- 第二个参数可选。
+  - 当没有第二个参数时，commander.js将返回Command对象，若有第二个参数，将返回原型对象。
+  - 当带有第二个参数，并且没有显示调用action(fn)时，则将会使用子命令模式。
+  - 所谓子命令模式即，./pm，./pm-install，./pm-search等。这些子命令跟主命令在不同的文件中。
+
+- 第三个参数一般不用，它可以设置是否显示的使用子命令模式。
+
+> 提示： 如果第一个参数name是“*”，则未匹配的命令名会传入第一个参数
+
+源码如下：
+```js
+Command.prototype.command = function(name, desc, opts) {
+  opts = opts || {};
+  var args = name.split(/ +/);
+  var cmd = new Command(args.shift());
+
+  if (desc) {
+    cmd.description(desc);
+    this.executables = true;
+    this._execs[cmd._name] = true;
+    if (opts.isDefault) this.defaultExecutable = cmd._name;
+  }
+
+  cmd._noHelp = !!opts.noHelp;
+  this.commands.push(cmd);
+  cmd.parseExpectedArgs(args);
+  cmd.parent = this;
+
+  if (desc) return this;
+  return cmd;
+};
+```
+
+#### `description`
+`.description('command description')`
+
+用于设置命令的描述或整体的描述
+
+#### `action`
+用于设置命令执行的相关回调。fn可以接受命令的参数为函数形参，顺序与command()中定义的顺序一致。
+
+#### `parse`
+`program.parse(process.argv)`
+此api一般是最后调用，用于解析process.argv。
+
+
+#### `outputHelp`
+
+一般用于未录入参数时自动打印帮助信息。
+
+```js
+if (!process.argv.slice(2).length) {
+    program.outputHelp(make_red);
+}
+
+function make_red(txt) {
+    return colors.red(txt); //display the help text in red on the console
+}
+```
+
 # 使用场景及实战提示
 书写命令行工具.
 
