@@ -49,6 +49,14 @@ program.parse(process.argv)
 
 > 特别注意：<> 表示必填，[] 表示选填
 
+**提示：**  Command 继承了EventEmitter，因此可以使用 on 绑定事件。
+
+```js
+var EventEmitter = require('events').EventEmitter;
+………
+require('util').inherits(Command, EventEmitter);
+```
+
 # 常用API
 
 #### `version`
