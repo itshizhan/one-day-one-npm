@@ -10,7 +10,7 @@ one day one npm packages. 一天学习一个npm 模块
 
 [003：is-generator-function](https://github.com/leeson8888/one-day-one-npm/tree/master/003-is-generator-function)
 
-[004: commander.js](https://github.com/itshizhan/one-day-one-npm/tree/master/004-commander)
+[004：commander.js](https://github.com/itshizhan/one-day-one-npm/tree/master/004-commander)
 
 
 # 推荐仓库
