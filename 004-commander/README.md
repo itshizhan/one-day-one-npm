@@ -37,7 +37,7 @@ program.parse(process.argv)
 
 - version：设置版本，`.version('0.0.1')`默认是 -V,--version, 添加第二个参数可以自定义设置
 - usage: 当前命令行工具的使用方式，如，必须有<command> <dir>命令、路径两个参数，[options] 选填
-- option: 第一个参数接受一个包含选项简写、选项全称和可选的接收值 (<> 表示必填，[] 表示选填) 的字符串，第二个参数是使用说明，第三个参数是默认值
+- option: 第一个参数接受一个包含选项简写、选项全称和可选的接收值 (<> 表示必填，[] 表示选填) 的字符串，第二个参数是使用说明，第三个参数是默认值。
 - command: 设置一个命令
 - alias：命名的别名，例如 webpack == w
 - description：命令的描述，它会在help里面展示
@@ -48,6 +48,20 @@ program.parse(process.argv)
 
 
 > 特别注意：<> 表示必填，[] 表示选填
+
+> --no-* option, 选项值为布尔型, 默认是false（undefined），但是，当option定义为no-*时，**默认值为true**，即不带option 参数时, 参数的默认值为true
+
+例如：
+```js
+program
+  .option('-d, --default', '测试选项默认值')
+  .option('-i, --no-ignore', '测试--no')
+
+
+console.log("选项默认值：" + program.default+"--"+program.ignore); 
+
+//// 执行  testcmd时，结果：undefined--true，当执行testcmd -i时，结果为：undefined--false
+```
 
 **提示：**  Command 继承了EventEmitter，因此可以使用 on 绑定事件。
 
@@ -135,6 +149,11 @@ function make_red(txt) {
     return colors.red(txt); //display the help text in red on the console
 }
 ```
+
+
+####   .allowUnknownOption()
+当使用了未定义的option时，会抛出error，例如`  error: unknown option `-p'`
+可以使用此方法屏蔽错误
 
 # 使用场景及实战提示
 书写命令行工具.
